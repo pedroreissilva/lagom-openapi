@@ -5,8 +5,10 @@
 
 name: Publish package to Maven Repository
 on:
-  release:
-    types: [created]
+  push:
+    # branches to consider in the event; optional, defaults to all
+    branches:
+      - master
 jobs:
   publish:
     runs-on: ubuntu-latest
