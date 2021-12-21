@@ -1,5 +1,6 @@
 package org.taymyr.lagom.javadsl.openapi
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.lightbend.lagom.javadsl.api.Service
 import com.lightbend.lagom.javadsl.api.transport.MessageProtocol
 import com.typesafe.config.Config
@@ -11,7 +12,7 @@ import org.taymyr.lagom.internal.openapi.isAnnotationPresentInherited
 import org.taymyr.lagom.internal.openapi.jsonToYaml
 import org.taymyr.lagom.internal.openapi.yamlToJson
 
-internal class OpenAPIContainer(service: Service, config: Config?) {
+internal class OpenAPIContainer(service: Service, config: Config?, mapper: ObjectMapper?) {
 
     data class OpenAPISpec(val json: String?, var yaml: String?)
 
@@ -20,7 +21,7 @@ internal class OpenAPIContainer(service: Service, config: Config?) {
         if (isAnnotated) {
             generateSpecResource(service)
         } else {
-            createSpecResponseFromResource(service, config)
+            createSpecResponseFromResource(service, config, mapper)
         }
     }
 
@@ -41,7 +42,7 @@ internal class OpenAPIContainer(service: Service, config: Config?) {
                 else -> default
             }
 
-        fun createSpecResponseFromResource(service: Service, config: Config?): OpenAPISpec {
+        fun createSpecResponseFromResource(service: Service, config: Config?, mapper: ObjectMapper?): OpenAPISpec {
             var spec: String? = null
             var protocol: MessageProtocol? = null
             val paths = if (config != null && config.hasPath(SPEC_CONFIG_PATH)) {
@@ -62,8 +63,8 @@ internal class OpenAPIContainer(service: Service, config: Config?) {
             }
             if (spec == null) log.error("OpenAPI specification not found in {}", paths)
             return when (protocol) {
-                JSON -> OpenAPISpec(spec, jsonToYaml(spec))
-                YAML -> OpenAPISpec(yamlToJson(spec), spec)
+                JSON -> OpenAPISpec(spec, jsonToYaml(spec, mapper))
+                YAML -> OpenAPISpec(yamlToJson(spec, mapper), spec)
                 else -> OpenAPISpec(null, null)
             }
         }

@@ -33,9 +33,9 @@ public final class TestUtils {
     }
 
     static void checkOpenAPISpec(LagomServiceInfo serviceInfo, String expectedYamlPath) {
-        String expected = yamlToJson(resourceAsString(expectedYamlPath));
+        String expected = yamlToJson(resourceAsString(expectedYamlPath), null);
         String actual = Yaml.pretty(new SpecGenerator().generate(serviceInfo));
-        assertThatJson(yamlToJson(actual)).when(Option.IGNORING_ARRAY_ORDER).isEqualTo(expected);
+        assertThatJson(yamlToJson(actual, null)).when(Option.IGNORING_ARRAY_ORDER).isEqualTo(expected);
     }
 
 }

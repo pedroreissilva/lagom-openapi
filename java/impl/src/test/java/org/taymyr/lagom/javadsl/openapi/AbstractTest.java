@@ -28,7 +28,7 @@ public abstract class AbstractTest {
 
         openapi = eventually(service.openapi(empty()).invokeWithHeaders(null, null));
         assertThat(openapi.first()).isEqualTo(OK_YAML);
-        assertThatJson(yamlToJson(openapi.second())).when(IGNORING_ARRAY_ORDER).isEqualTo(expectedJson);
+        assertThatJson(yamlToJson(openapi.second(), null)).when(IGNORING_ARRAY_ORDER).isEqualTo(expectedJson);
     }
 
 }

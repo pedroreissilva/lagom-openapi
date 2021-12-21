@@ -26,7 +26,7 @@ class GeneratorSpec extends AnyWordSpec with OpenAPISpec with Matchers {
     "generate yaml specification" in {
       check(
         new PetsServiceImpl(ConfigFactory.empty),
-        Json.parse(yamlToJson(resourceAsString("pets.yml")))
+        Json.parse(yamlToJson(resourceAsString("pets.yml"), null))
       )
     }
   }

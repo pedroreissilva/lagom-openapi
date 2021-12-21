@@ -20,7 +20,7 @@ trait OpenAPISpec extends Matchers {
     headerSpec = result.value.get.get
     headerSpec._1.status shouldBe 200
     headerSpec._1.protocol.contentType shouldBe Some("application/x-yaml")
-    Json.parse(yamlToJson(headerSpec._2)) shouldBe expectedJson
+    Json.parse(yamlToJson(headerSpec._2, null)) shouldBe expectedJson
   }
 
 }

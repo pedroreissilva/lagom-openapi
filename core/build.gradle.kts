@@ -1,5 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
+import org.gradle.internal.impldep.com.google.gson.internal.bind.TypeAdapters.URI
 import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
 import org.jlleitschuh.gradle.ktlint.reporter.ReporterType
 
@@ -79,6 +80,17 @@ publishing {
             artifact(sourcesJar)
             artifact(dokkaJar)
             pom(Publishing.pom)
+        }
+    }
+
+    repositories {
+        maven {
+            name = System.getenv("MAVEN_REPOSITORY_NAME")
+            url = uri(System.getenv("MAVEN_REPOSITORY_URL"))
+            credentials {
+                username = System.getenv("MAVEN_REPOSITORY_USERNAME")
+                password = System.getenv("MAVEN_REPOSITORY_PASSWORD")
+            }
         }
     }
 }

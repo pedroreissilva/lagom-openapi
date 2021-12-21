@@ -17,7 +17,7 @@ internal val JSON: MessageProtocol = MessageProtocol.fromContentTypeHeader(Optio
 abstract class AbstractOpenAPIService(config: Config? = null) : OpenAPIService {
 
     private val openapi: OpenAPIContainer by lazy {
-        OpenAPIContainer(this, config)
+        OpenAPIContainer(this, config, null)
     }
 
     private fun response(spec: String?, protocol: MessageProtocol) = Pair.create(

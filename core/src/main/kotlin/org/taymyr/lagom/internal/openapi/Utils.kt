@@ -9,14 +9,26 @@ import java.io.IOException
 private val jsonMapper = ObjectMapper()
 private val yamlMapper = ObjectMapper(YAMLFactory())
 
-fun yamlToJson(yaml: String?): String? = try {
-    yaml?.let { jsonMapper.writeValueAsString(yamlMapper.readValue(it, Any::class.java)) }
+fun yamlToJson(yaml: String?, mapper: ObjectMapper?): String? = try {
+    yaml?.let {
+        mapper?.let {
+            mapper.writeValueAsString(yamlMapper.readValue(yaml, Any::class.java))
+        } ?: run {
+            jsonMapper.writeValueAsString(yamlMapper.readValue(it, Any::class.java))
+        }
+    }
 } catch (e: IOException) {
     null
 }
 
-fun jsonToYaml(json: String?): String? = try {
-    json?.let { yamlMapper.writeValueAsString(jsonMapper.readValue(it, Any::class.java)) }
+fun jsonToYaml(json: String?, mapper: ObjectMapper?): String? = try {
+    json?.let {
+        mapper?.let {
+            mapper.writeValueAsString(jsonMapper.readValue(json, Any::class.java))
+        } ?: run {
+            yamlMapper.writeValueAsString(jsonMapper.readValue(it, Any::class.java))
+        }
+    }
 } catch (e: IOException) {
     null
 }

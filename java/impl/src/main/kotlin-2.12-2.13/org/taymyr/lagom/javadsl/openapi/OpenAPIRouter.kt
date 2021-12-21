@@ -1,5 +1,6 @@
 package org.taymyr.lagom.javadsl.openapi
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.lightbend.lagom.javadsl.api.Service
 import com.typesafe.config.Config
 import play.api.mvc.Handler
@@ -18,6 +19,7 @@ class OpenAPIRouter @JvmOverloads constructor(
     routingDsl: Provider<RoutingDsl>,
     serviceProvider: Provider<out Service>,
     configProvider: Provider<Config>,
+    mapper: ObjectMapper? = null,
     path: String? = null
 ) : SimpleRouter {
 
@@ -25,7 +27,7 @@ class OpenAPIRouter @JvmOverloads constructor(
 
     private val config: Config by lazy { configProvider.get() }
 
-    private val openapi: OpenAPIContainer by lazy { OpenAPIContainer(service, config) }
+    private val openapi: OpenAPIContainer by lazy { OpenAPIContainer(service, config, mapper) }
 
     private fun response(spec: String?, contentType: String): Result =
         spec?.let { ok(it).`as`(contentType) } ?: notFound("OpenAPI specification not found")

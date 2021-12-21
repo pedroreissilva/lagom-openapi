@@ -73,8 +73,8 @@ private[taymyr] class OpenAPIContainer(service: Service, config: Config) {
     }
     if (spec == null) log.error(s"OpenAPI specification not found in $paths")
     protocol match {
-      case JSON => OpenAPISpec(spec, jsonToYaml(spec))
-      case YAML => OpenAPISpec(yamlToJson(spec), spec)
+      case JSON => OpenAPISpec(spec, jsonToYaml(spec, null))
+      case YAML => OpenAPISpec(yamlToJson(spec, null), spec)
       case _    => OpenAPISpec(null, null)
     }
   }

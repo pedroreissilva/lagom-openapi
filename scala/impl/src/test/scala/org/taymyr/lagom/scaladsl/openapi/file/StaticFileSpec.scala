@@ -21,14 +21,14 @@ class StaticFileSpec extends AnyWordSpec with OpenAPISpec {
     "return default yaml spec" in {
       check(
         new Test2ServiceImpl(ConfigFactory.empty),
-        Json.parse(yamlToJson(resourceAsString("test2.yaml")))
+        Json.parse(yamlToJson(resourceAsString("test2.yaml"), null))
       )
     }
 
     "return default yml spec" in {
       check(
         new Test3ServiceImpl(ConfigFactory.empty),
-        Json.parse(yamlToJson(resourceAsString("test3.yml")))
+        Json.parse(yamlToJson(resourceAsString("test3.yml"), null))
       )
     }
   }

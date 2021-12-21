@@ -52,7 +52,7 @@ class StaticFileTest extends AbstractTest {
     void serviceWithDefaultYamlSpec() throws InterruptedException, ExecutionException, TimeoutException {
         check(
             new Test2ServiceImpl(ConfigFactory.load()),
-            yamlToJson(resourceAsString("test2.yaml"))
+            yamlToJson(resourceAsString("test2.yaml"), null)
         );
     }
 
@@ -61,7 +61,7 @@ class StaticFileTest extends AbstractTest {
     void serviceWithDefaultYmlSpec() throws InterruptedException, ExecutionException, TimeoutException {
         check(
             new Test3ServiceImpl(ConfigFactory.load()),
-            yamlToJson(resourceAsString("test3.yml"))
+            yamlToJson(resourceAsString("test3.yml"), null)
         );
     }
 
@@ -70,7 +70,7 @@ class StaticFileTest extends AbstractTest {
     void ktServiceWithDefaultYmlSpec() throws InterruptedException, ExecutionException, TimeoutException {
         check(
             new Test4ServiceImpl(ConfigFactory.load()),
-            yamlToJson(resourceAsString("test4.yml"))
+            yamlToJson(resourceAsString("test4.yml"), null)
         );
     }
 

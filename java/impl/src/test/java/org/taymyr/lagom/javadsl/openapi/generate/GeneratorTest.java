@@ -35,7 +35,7 @@ class GeneratorTest extends AbstractTest {
     void shouldNormalGenerateYaml() throws InterruptedException, ExecutionException, TimeoutException, IOException {
         check(
             new PetsServiceImpl(load()),
-            yamlToJson(resourceAsString("pets.yml"))
+            yamlToJson(resourceAsString("pets.yml"), null)
         );
     }
 
