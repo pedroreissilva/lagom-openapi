@@ -91,6 +91,7 @@ publishing {
                 username = System.getenv("MAVEN_REPOSITORY_USERNAME")
                 password = System.getenv("MAVEN_REPOSITORY_PASSWORD")
             }
+            isAllowInsecureProtocol = true
         }
     }
 }
