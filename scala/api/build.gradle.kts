@@ -23,19 +23,19 @@ val scalaDocJar by tasks.creating(Jar::class) {
 tasks.check { dependsOn(tasks.checkScalafmtAll) }
 
 publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            artifactId = "${project.name}_$scalaBinaryVersion"
-            from(components["java"])
-            artifact(sourcesJar)
-            artifact(scalaDocJar)
-            pom(Publishing.pom)
-        }
-    }
+//    publications {
+//        create<MavenPublication>("maven") {
+//            artifactId = "${project.name}_$scalaBinaryVersion"
+//            from(components["java"])
+//            artifact(sourcesJar)
+//            artifact(scalaDocJar)
+//            pom(Publishing.pom)
+//        }
+//    }
 }
 
 @Suppress("UnstableApiUsage")
 signing {
     isRequired = isRelease
-    sign(publishing.publications["maven"])
+    //sign(publishing.publications["maven"])
 }

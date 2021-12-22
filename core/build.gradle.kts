@@ -56,32 +56,32 @@ val sourcesJar by tasks.creating(Jar::class) {
     from(sourceSets.main.get().allSource)
 }
 
-val dokkaJar by tasks.creating(Jar::class) {
-    group = JavaBasePlugin.DOCUMENTATION_GROUP
-    archiveClassifier.set("javadoc")
-    from(tasks.dokka)
-}
+//val dokkaJar by tasks.creating(Jar::class) {
+//    group = JavaBasePlugin.DOCUMENTATION_GROUP
+//    archiveClassifier.set("javadoc")
+//    from(tasks.dokka)
+//}
 
-tasks.dokka {
-    outputFormat = "javadoc"
-    outputDirectory = "$buildDir/javadoc"
-    configuration {
-        jdkVersion = 8
-        reportUndocumented = false
-    }
-    impliedPlatforms = mutableListOf("JVM")
-}
+//tasks.dokka {
+//    outputFormat = "javadoc"
+//    outputDirectory = "$buildDir/javadoc"
+//    configuration {
+//        jdkVersion = 8
+//        reportUndocumented = false
+//    }
+//    impliedPlatforms = mutableListOf("JVM")
+//}
 
 publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            artifactId = "${project.name}_$scalaBinaryVersion"
-            from(components["java"])
-            artifact(sourcesJar)
-            artifact(dokkaJar)
-            pom(Publishing.pom)
-        }
-    }
+//    publications {
+//        create<MavenPublication>("maven") {
+//            artifactId = "${project.name}_$scalaBinaryVersion"
+//            from(components["java"])
+//            artifact(sourcesJar)
+//            //artifact(dokkaJar)
+//            pom(Publishing.pom)
+//        }
+//    }
 
     repositories {
         maven {
@@ -98,5 +98,5 @@ publishing {
 @Suppress("UnstableApiUsage")
 signing {
     isRequired = isRelease
-    sign(publishing.publications["maven"])
+    //sign(publishing.publications["maven"])
 }

@@ -34,33 +34,44 @@ val sourcesJar by tasks.creating(Jar::class) {
     from(sourceSets.main.get().allSource)
 }
 
-val dokkaJar by tasks.creating(Jar::class) {
-    group = JavaBasePlugin.DOCUMENTATION_GROUP
-    archiveClassifier.set("javadoc")
-    from(tasks.dokka)
-}
+//val dokkaJar by tasks.creating(Jar::class) {
+//    group = JavaBasePlugin.DOCUMENTATION_GROUP
+//    archiveClassifier.set("javadoc")
+//    from(tasks.dokka)
+//}
 
-tasks.dokka {
-    outputFormat = "javadoc"
-    outputDirectory = "$buildDir/javadoc"
-    configuration {
-        jdkVersion = 8
-        reportUndocumented = false
-        externalDocumentationLink {
-            url = URL("https://www.lagomframework.com/documentation/1.6.x/java/api/")
-        }
-    }
-    impliedPlatforms = mutableListOf("JVM")
-}
+//tasks.dokka {
+//    outputFormat = "javadoc"
+//    outputDirectory = "$buildDir/javadoc"
+//    configuration {
+//        jdkVersion = 8
+//        reportUndocumented = false
+//        externalDocumentationLink {
+//            url = URL("https://www.lagomframework.com/documentation/1.6.x/java/api/")
+//        }
+//    }
+//    impliedPlatforms = mutableListOf("JVM")
+//}
 
 publishing {
-    publications {
-        create<MavenPublication>("maven") {
-            artifactId = "${project.name}_$scalaBinaryVersion"
-            from(components["java"])
-            artifact(sourcesJar)
-            artifact(dokkaJar)
-            pom(Publishing.pom)
+//    publications {
+//        create<MavenPublication>("maven") {
+//            artifactId = "${project.name}_$scalaBinaryVersion"
+//            from(components["java"])
+//            artifact(sourcesJar)
+//            //artifact(dokkaJar)
+//            pom(Publishing.pom)
+//        }
+//    }
+
+    repositories {
+        maven {
+            name = System.getenv("MAVEN_REPOSITORY_NAME")
+            url = uri(System.getenv("MAVEN_REPOSITORY_URL"))
+            credentials {
+                username = System.getenv("MAVEN_REPOSITORY_USERNAME")
+                password = System.getenv("MAVEN_REPOSITORY_PASSWORD")
+            }
         }
     }
 }
@@ -68,5 +79,5 @@ publishing {
 @Suppress("UnstableApiUsage")
 signing {
     isRequired = isRelease
-    sign(publishing.publications["maven"])
+    //sign(publishing.publications["maven"])
 }
