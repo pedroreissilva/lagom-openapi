@@ -44,9 +44,9 @@ dependencies {
     testImplementation("net.javacrumbs.json-unit", "json-unit-assertj", Versions.`json-unit`)
 }
 
-configurations {
-    testCompile.get().extendsFrom(compileOnly.get())
-}
+//configurations {
+//    testCompile.get().extendsFrom(compileOnly.get())
+//}
 
 ktlint {
     version.set(Versions.ktlint)

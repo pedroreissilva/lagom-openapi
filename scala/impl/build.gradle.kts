@@ -17,9 +17,9 @@ dependencies {
     testImplementation(evaluationDependsOn(":lagom-openapi-core").sourceSets.test.get().output)
 }
 
-configurations {
-    testCompile.get().extendsFrom(compileOnly.get())
-}
+//configurations {
+//    testCompile.get().extendsFrom(compileOnly.get())
+//}
 
 val scalaTest by tasks.creating(JavaExec::class) {
     main = "org.scalatest.tools.Runner"
