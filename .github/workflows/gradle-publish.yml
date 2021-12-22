@@ -26,7 +26,7 @@ jobs:
       - name: Publish package
         run: gradle publish -x test
         env:
-          MAVEN_REPOSITORY_NAME: LE Repository
+          MAVEN_REPOSITORY_NAME: LE-Repository
           MAVEN_REPOSITORY_URL: http://portal.lojaenergetica.xyz:8181
           MAVEN_REPOSITORY_USERNAME: admin
           MAVEN_REPOSITORY_PASSWORD: ${{ secrets.MAVEN_REPOSITORY_PASSWORD }}
