@@ -88,15 +88,15 @@ val sourcesJar by tasks.creating(Jar::class) {
 //}
 
 publishing {
-//    publications {
-//        create<MavenPublication>("maven") {
-//            artifactId = "${project.name}_$scalaBinaryVersion"
-//            from(components["java"])
-//            artifact(sourcesJar)
-//            //artifact(dokkaJar)
-//            pom(Publishing.pom)
-//        }
-//    }
+    publications {
+        create<MavenPublication>("maven") {
+            artifactId = "${project.name}_$scalaBinaryVersion"
+            from(components["java"])
+            artifact(sourcesJar)
+            //artifact(dokkaJar)
+            pom(Publishing.pom)
+        }
+    }
 
     repositories {
         maven {
@@ -112,5 +112,5 @@ publishing {
 
 signing {
     isRequired = isRelease
-    //sign(publishing.publications["maven"])
+    sign(publishing.publications["maven"])
 }

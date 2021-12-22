@@ -27,9 +27,9 @@ jgitver {
 nexusPublishing {
     packageGroup.set("org.taymyr")
     clientTimeout.set(Duration.ofMinutes(60))
-    repositories {
-        sonatype()
-    }
+    //repositories {
+    //    sonatype()
+    //}
 }
 
 val jacocoAggregateMerge by tasks.creating(JacocoMerge::class) {

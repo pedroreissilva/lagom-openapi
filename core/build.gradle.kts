@@ -73,15 +73,15 @@ val sourcesJar by tasks.creating(Jar::class) {
 //}
 
 publishing {
-//    publications {
-//        create<MavenPublication>("maven") {
-//            artifactId = "${project.name}_$scalaBinaryVersion"
-//            from(components["java"])
-//            artifact(sourcesJar)
+    publications {
+        create<MavenPublication>("maven") {
+            artifactId = "${project.name}_$scalaBinaryVersion"
+            from(components["java"])
+            artifact(sourcesJar)
 //            //artifact(dokkaJar)
-//            pom(Publishing.pom)
-//        }
-//    }
+            pom(Publishing.pom)
+        }
+    }
 
     repositories {
         maven {
@@ -98,5 +98,5 @@ publishing {
 @Suppress("UnstableApiUsage")
 signing {
     isRequired = isRelease
-    //sign(publishing.publications["maven"])
+    sign(publishing.publications["maven"])
 }
