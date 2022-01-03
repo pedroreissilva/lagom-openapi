@@ -27,7 +27,7 @@ jobs:
         run: gradle publish -x test
         env:
           MAVEN_REPOSITORY_NAME: S3_Repository
-          MAVEN_REPOSITORY_URL: http://nexus.devops-spms.xyz/nexus/content/repositories/snapshots/
+          MAVEN_REPOSITORY_URL: http://nexus.devops-spms.xyz/nexus/content/repositories/releases/
           #repository/maven-snapshots/
           MAVEN_REPOSITORY_USERNAME: deployment
           MAVEN_REPOSITORY_PASSWORD: ${{ secrets.S3_MAVEN_REPOSITORY_PASSWORD }}
